@@ -14,8 +14,12 @@ reps = 0
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
+def reset_timer():
+    """Reset a timer to 00:00"""
+    canvas.itemconfig(timer_text, text="00:00")
 
-# ---------------------------- TIMER MECHANISM ------------------------------- # 
+
+# ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
     """Start a timer"""
     global reps
@@ -32,11 +36,6 @@ def start_timer():
         count_down(work_sec)
 
 
-def reset_timer():
-    """Reset a timer to 00:00"""
-    canvas.itemconfig(timer_text, text="00:00")
-
-
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
     """Start a count down"""
@@ -44,12 +43,12 @@ def count_down(count):
     count_sec = count % 60
     if count_sec < 10:
         count_sec = f"0{count_sec}"
-    else:
-        start_timer()
 
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
         window.after(1000, count_down, count - 1)
+    else:
+        start_timer()
 
 
 # ---------------------------- UI SETUP ------------------------------- #
